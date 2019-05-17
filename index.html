@@ -347,7 +347,7 @@ $ </pre>
 	<code>GO_EXTLINK_ENABLED=1</code>.  Conveniently, setting <code>GO_EXTLINK_ENABLED=1</code>
 	while building golang itself has an additional global effect of changing <i>default</i> value of
 	<code>GO_EXTLINK_ENABLED</code> to 1.  This breaks cross-compile tests as latter naturally expect
-	default linking mode to be internal.
+	default link mode to be internal.
   </p>
 
   <p>
@@ -546,7 +546,7 @@ $ <pre>
   </p>
 
   <p>
-    In order to change this, a bunch of declarations for external functions has to unwired from
+    In order to change this, a bunch of declarations for external functions has to be unwired from
 	being resolved strictly through <code>.dylib</code>.  Such change would be really intrusive
 	and likely real pain to rebase for future releases of golang. I did not bother myself with even
 	evaluating it.
