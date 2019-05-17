@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="theme-color" content="#375EAB">
+	<meta name="keywords" content="How to run go1.12 on OS X Mavericks (10.9.5),
+golang,golang 1.12,darwin,osx,os x,mavericks,10.9,10.9.5,macports,legacy,legacy-support,macports-legacy-support">
+	<title>Golang and other flops</title>
+	<link type="text/css" rel="stylesheet" href="/lib/godoc/style.css">
+	<link type="text/css" rel="stylesheet" href="/fonts.css">
+	<script type="text/javascript">window.initFuncs = [];</script>
+	<style>
+		#sidebar {
+			float: right;
+			padding-left: 20px;
+			width: 40%;
+			max-width: 250px;
+			background: #F3F3F3;
+			margin: 20px 0 20px 20px;
+		}
+		#sidebar ul {
+			padding: 0;
+		}
+		#sidebar li {
+			list-style-type: none;
+		}
+		#content .author {
+			font-style: italic;
+		}
+		#content .article {
+			margin-bottom: 50px;
+		}
+		#content .date {
+			color: #999;
+		}
+		#content .tags {
+			color: #999;
+			font-size: smaller;
+		}
+		#content .iframe, #content .image {
+			margin: 20px;
+		}
+		#content .title {
+			margin: 20px 0;
+		}
+		#content img {
+			max-width: 100%;
+		}
+		.article[data-slug='/go-fonts'] {
+			font-family: Go, sans-serif;
+		}
+		.article[data-slug='/go-fonts'] pre,
+		.article[data-slug='/go-fonts'] code {
+			font-family: Go Mono, monospace;
+		}
+	</style>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+</script>
+</head>
+<body>
+
+<div id="topbar"><div class="container">
+
+<div class="top-heading" id="heading-wide"><a href="#">Golang and other flops</a></div>
+<div class="top-heading" id="heading-narrow"><a href="#">Golang and other flops</a></div>
+<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="https://golang.org/search">
+<div id="menu">
+<a href="https://golang.org/doc/">Documents</a>
+<a href="https://golang.org/pkg/">Packages</a>
+<a href="https://golang.org/project/">The Project</a>
+<a href="https://golang.org/help/">Help</a>
+
+<a href="https://blog.golang.org">Blog</a>
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+<div id="page">
+<div class="container">
+
+<div id="sidebar">
+
+	<h4>Links</h4>
+	<ul>
+	<li><a href='//golang.org/'>golang.org</a></li>
+	<li><a href='//golang.org/doc/install.html'>Install Go</a></li>
+	<li><a href='//tour.golang.org/'>A Tour of Go</a></li>
+	<li><a href='//golang.org/doc/'>Go Documentation</a></li>
+	<li><a href='//groups.google.com/group/golang-nuts'>Go Mailing List</a></li>
+	<li><a href='//plus.google.com/communities/114112804251407510571'>Go+ Community</a></li>
+	<li><a href='//twitter.com/golang'>Go on Twitter</a></li>
+	</ul>
+
+	<p><a href="https://blog.golang.org/index">Blog index</a></p>
+</div>
+
+<div id="content">
+
+
+	<h1><a href="/" id="blog-title">Flops</a></h1>
+
+	<div class="article" data-slug="/making-go1.12-fly-on-os-x-mavericks-10.9.5">
+		<h3 class="title"><a href="/making-go1.12-fly-on-os-x-mavericks-10.9.5">
+			Making go1.12 fly on OS X Mavericks (10.9.5)</a></h3>
+		<p class="date">15 May 2019</p>
+
+  <p>
+    If you are like me and just cannot live without having Go 1.12 run on your trusty Mavericks, you need
+	to install <code>libMacportsLegacySupport</code> from project MacPorts.  Check whether you already
+	have it installed:
+  </p>
+
+  <div class=code>
+    <pre>$ ls -la /usr/local/lib/*cySu* 
+-rw-r--r--  1 root  wheel  19848 May 11 07:47 /usr/local/lib/libMacportsLegacySupport.a
+-rwxr-xr-x  1 root  wheel  19012 May 11 07:47 /usr/local/lib/libMacportsLegacySupport.dylib</pre>
+  </div>
+
+  <p>
+    I initially had not. As I am not letting gigabytes of useless crap to waste space on my hard disk,
+	I installed
+	<a href="https://github.com/macports/macports-legacy-support"
+		target="_blank"><code>macports-legacy-support</code></a> directly:
+  </p>
+
+  <div class=code>
+    <pre>$ mkdir macports 
+$ ( cd macports/ && git clone https://github.com/macports/macports-legacy-support ) 
+Cloning into 'macports-legacy-support'...
+remote: Enumerating objects: 32, done.
+remote: Counting objects: 100% (32/32), done.
+remote: Compressing objects: 100% (28/28), done.
+remote: Total 625 (delta 14), reused 8 (delta 3), pack-reused 593
+Receiving objects: 100% (625/625), 156.30 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (394/394), done.
+Checking connectivity... done.
+$ ( cd macports/macports-legacy-support/ && sudo make install ) >& macports-legacy-support.install.log 
+$ ls -la /usr/local/lib/*cySu*</pre>
+  </div>
+
+  <p>
+    Alternatively, you can consult with project MacPorts on how to install legacy support for OS X.
+  </p>
+
+  <p>
+    You need a working version of Golang to bootstrap <code>go1.12</code>.  I used <code>/usr/local/go1.9.7</code>,
+	however your version may be different.
+  </p>
+
+  <p>
+    Examples that follow work best if you begin in your home directory, your shell is <code>/bin/bash</code>
+	and your <code>GOHOME</code> is default <code>$HOME/go</code>.
+  </p>
+
+
+  <h4 id="TOC_1.">Parte 1</h4>
+
+  <p>
+    Now that <code>libMacportsLegacySupport</code> was installed, I used
+	<a href="https://trac.macports.org/ticket/58138"
+		target="_blank"><i>ticket</i></a> and
+	<a href="https://github.com/macports/macports-ports/commit/abe46d0764f08fdec9a4923880ce03edbc768a0d"
+		target="_blank"><i>patch</i></a> from MacPorts to get working version of <code>go1.12</code>
+	for a starter. I created and downloaded a 
+	<a href="https://github.com/alexv-github/go"
+		target="_blank"><i>fork of golang/go</i></a>:
+  </p>
+
+  <div class=code>
+    <pre>$ /usr/local/go1.9.7/bin/go get github.com/alexv-github/go 
+package github.com/alexv-github/go: no Go files in /Users/ubuntu/go/src/github.com/alexv-github/go
+$ </pre>
+  </div>
+
+  <p>
+    The patched code is now on the branch 
+	<a href="https://github.com/alexv-github/go/commits/go1.12.5-osx-legacy-take1"
+		target="_blank"><code>go1.12.5-osx-legacy-take1</code></a> of this fork. After certain
+	tweaking of environment variables, suitable build incantation turned out to be this:
+  </p>
+
+  <div class=code>
+    <pre>$ ( cd go/src/github.com/alexv-github/go/ && git checkout go1.12.5-osx-legacy-take1 ) 
+Checking out files: 100% (10463/10463), done.
+Previous HEAD position was 6174b5e... go1
+Branch go1.12.5-osx-legacy-take1 set up to track remote branch go1.12.5-osx-legacy-take1 from origin.
+Switched to a new branch 'go1.12.5-osx-legacy-take1'
+$ ( cd go/src/github.com/alexv-github/go/ && cd src && configure_ldflags='-L/usr/local/lib -lMacportsLegacySupport' && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 GO_EXTLINK_ENABLED=1 GO_LDFLAGS='"-extldflags='"${configure_ldflags}"'"' BOOT_GO_LDFLAGS='-extldflags='"${configure_ldflags}"'' ./make.bash ) 
+Building Go cmd/dist using /usr/local/go1.9.7.
+Building Go toolchain1 using /usr/local/go1.9.7.
+Building Go bootstrap cmd/go (go_bootstrap) using Go toolchain1.
+clang: warning: argument unused during compilation: '-nopie'
+Building Go toolchain2 using go_bootstrap and Go toolchain1.
+Building Go toolchain3 using go_bootstrap and Go toolchain2.
+Building packages and commands for darwin/amd64.
+---
+Installed Go for darwin/amd64 in /Users/ubuntu/go/src/github.com/alexv-github/go
+Installed commands in /Users/ubuntu/go/src/github.com/alexv-github/go/bin
+$ </pre>
+  </div>
+
+  <p>
+    Everything seemed to be in order, so far.
+  </p>
+
+
+  <h4 id="TOC_2.">Parte 2</h4>
+
+  <p>
+<!--
+    Original instructions to install golang from sources actually invoke
+	<a href="https://golang.org/doc/install/source#install"
+		target="_blank"><code>all.bash</code></a>.
+  -->
+
+    <a href="https://golang.org/doc/install/source#install"
+		target="_blank">Original instructions</a> to install golang from sources actually invoke
+	<code>all.bash</code>. <code>all.bash</code>
+	<a href="https://github.com/alexv-github/go/blob/release-branch.go1.12/src/all.bash#L12"
+		target="_blank">invokes</a> <code>make.bash</code> and after that <code>run.bash</code>.
+	It is the latter that runs golang tests.  I replaced <code>make.bash</code> with
+	<code>all.bash</code>, but this failed even before the tests started, because environment
+	variable <code>BOOT_GO_LDFLAGS</code> was still set after <code>make.bash</code>.  This was one thing to fix.
+  </p>
+
+  <p>
+    MacPorts solution reqiures that golang environment variable <code>GO_LDFLAGS</CODE> is set to
+	(or contains) a very specific value in order to link golang executable externally with
+	<code>libMacportsLegacySupport</code>. This is not acceptable - consider the case when golang is invoked
+	from script beyond your control and already uses its own setting of <code>GO_LDFLAGS</code>.
+	To fix this, I added code to always include <code>libMacportsLegacySupport</code> when linking golang
+	executable externally. With this, <code>GO_LDFLAGS</code> need not be involved at all.
+  </p>
+
+  <p>
+    The patched code is now on the branch 
+	<a href="https://github.com/alexv-github/go/commits/go1.12.5-osx-legacy-take2"
+		target="_blank"><code>go1.12.5-osx-legacy-take2</code></a> of the fork. Build
+		incantation became simpler:
+  </p>
+
+  <div class=code>
+    <pre>$ ( cd go/src/github.com/alexv-github/go/ && git checkout go1.12.5-osx-legacy-take2 ) 
+Branch go1.12.5-osx-legacy-take2 set up to track remote branch go1.12.5-osx-legacy-take2 from origin.
+Switched to a new branch 'go1.12.5-osx-legacy-take2'
+$ ( cd go/src/github.com/alexv-github/go/ && cd src && configure_mplsldflags='-L/usr/local/lib -lMacportsLegacySupport' && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 ./all.bash ) 
+Building Go cmd/dist using /usr/local/go1.9.7.
+Building Go toolchain1 using /usr/local/go1.9.7.
+Building Go bootstrap cmd/go (go_bootstrap) using Go toolchain1.
+clang: warning: argument unused during compilation: '-nopie'
+Building Go toolchain2 using go_bootstrap and Go toolchain1.
+Building Go toolchain3 using go_bootstrap and Go toolchain2.
+Building packages and commands for darwin/amd64.
+
+##### Testing packages.
+ok  	archive/tar	0.111s
+ok  	archive/zip	3.264s
+
+<...boring...details...omitted...>
+
+ok  	cmd/vendor/golang.org/x/arch/x86/x86asm	0.138s
+ok  	cmd/vendor/golang.org/x/crypto/ssh/terminal	0.015s
+ok  	cmd/vendor/golang.org/x/sys/unix	2.333s
+ok  	cmd/vet	18.499s
+2019/05/16 12:04:10 Failed: exit status 1
+$ </pre>
+  </div>
+
+  <p>
+    With that, <code>all.bash</code> started to run tests.  However, cross-compile tests were failing,
+	and on top of this several tests were giving segfault in <code>FetchPEMRoots</code>.
+  </p>
+
+  <p>
+    Segfaulting?  In golang own <code>crypto/x509</code>?  What the fkety-fk.
+  </p>
+
+
+  <h4 id="TOC_3.">Intermezzo</h4>
+
+  <p>
+    I am a perfect tester.  Whenever I give a try to another piece of some shitey half-baked software,
+	it instantly hits one of tripwires which I have naturally placed around.  As luck had it this time,
+	"my problem" stemmed from user certificate present on my account.  After a bit of boring bisecting,
+	I narrowed down segfault to this fragment of
+	<a href="https://github.com/alexv-github/go/blob/release-branch.go1.12/src/crypto/x509/root_cgo_darwin.go#L30"
+		target="_blank"><code>isSSLPolicy()</code></a>:
+  </p>
+
+  <div class=code>
+    <pre>	CTypeRef value = NULL;
+	if (CFDictionaryGetValueIfPresent(properties, kSecPolicyOid, (const void **)&value) {
+		CFRelease(properties);
+		return CFEqual(value, kSecPolicyAppleSSL);
+	}</pre>
+  </div>
+
+  <p>
+    which obviously works much better when changed like
+	<a href="https://github.com/alexv-github/go/commit/2ce3919cbfd526f4c427e52b99726e1d55925995"
+		target="_blank"><i>this</i></a>.
+  </p>
+
+  <p>
+    Here is a shapshot of the corresponding
+	<a href="https://github.com/alexv-github/go/blame/release-branch.go1.12/src/crypto/x509/root_cgo_darwin.go#L18"
+		target="_blank"><i>blame</i></a>:
+  </p>
+
+<div class="image">
+  <img src="content/go1.12-mavericks/blame-go1_12-root_cgo_darwin_go.png" width="840">
+</div>
+
+  <p>
+    How very convenient. Evading detection for 9 months, and counting.  So much for the most friendly
+	<a href="https://go-review.googlesource.com/c/128056"
+		target="_blank"><i>code review</i></a>.
+  </p>
+
+  <p>
+    Naturally, G shiteheads don't even bother to validate code which they write.  And why would they
+	- when they are so-o-o 
+<span class="gc1">G</span><span class="gc2">O</span><span class="gc3">O</span><span class="gc4">G</span><span class="gc5">L</span><span class="gc6">E</span>.
+	Let's see how long does it take from them a) to notice that problem has been exposed and
+	- if ever - b) to apply the fix.
+  </p>
+
+  <p>
+    In any case, if you are getting segfaults in <code>FetchPEMRoots</code>, apply patch from
+	<a href="https://github.com/alexv-github/go/commits/go1.12-fkup-0001"
+		target="_blank"><i>this</i></a> branch of the fork and see if this does the trick.
+  </p>
+
+
+  <h4 id="TOC_4.">Parte 3</h4>
+
+  <p>
+    Cross-compile tests were failing because MacPorts solution has second requirement: it forces
+	golang to always use external link mode using environment variable setting
+	<code>GO_EXTLINK_ENABLED=1</code>.  Conveniently, setting <code>GO_EXTLINK_ENABLED=1</code>
+	while building golang itself has an additional global effect of changing <i>default</i> value of
+	<code>GO_EXTLINK_ENABLED</code> to 1.  This breaks cross-compile tests as latter naturally expect
+	default linking mode to be internal.
+  </p>
+
+  <p>
+    Setting default value of <code>GO_EXTLINK_ENABLED</code> to 1 is of course a bad idea.  But what is a
+	really bad idea, is to <b>give an option</b> to subtly change default value of <code>GO_EXTLINK_ENABLED</code>.
+	Not a single one official golang build uses default setting of 1 for <code>GO_EXTLINK_ENABLED</code>.
+	Consequently, golang tests were never ever run with default setting of 1.  And I give you this
+	accurate prediction: no one at golang will ever bother to fix tests with regard to this.  Indeed,
+	I will not be one to blame them for not doing it.
+  </p>
+
+  <p>
+    In order to verify that my understanding is correct, I additionally changed selection of link mode in
+	<a href="https://github.com/alexv-github/go/commit/6ed1d853abe203c9c3b73fbe26a0cdacf114397f"
+		target="_blank"><code>determineLinkMode()</code></a> to be always internal for cross-compiles,
+	even when link mode is forced to be external by setting variable <code>GO_EXTLINK_ENABLED=1</code>
+	(explicitly or by default). This is not acceptable as a permanent solution as it changes the default
+	behavior of golang with regard to setting of <code>GO_EXTLINK_ENABLED</code>.  However, at this
+	point I only wanted to see whether tests will pass after this modification.
+  </p>
+
+  <p>
+    The patched code is on the branch 
+	<a href="https://github.com/alexv-github/go/commits/go1.12.5-osx-legacy-take3"
+		target="_blank"><code>go1.12.5-osx-legacy-take3</code></a> of the fork. Build
+		incantation remains the same:
+  </p>
+
+  <div class=code>
+    <pre>$ ( cd go/src/github.com/alexv-github/go/ && git checkout go1.12.5-osx-legacy-take3 ) 
+Branch go1.12.5-osx-legacy-take3 set up to track remote branch go1.12.5-osx-legacy-take3 from origin.
+Switched to a new branch 'go1.12.5-osx-legacy-take3'
+$ ( cd go/src/github.com/alexv-github/go/ && git show 2ce3919 | patch -p1 ) 
+patching file src/crypto/x509/root_cgo_darwin.go
+$ ( cd go/src/github.com/alexv-github/go/ && cd src && configure_mplsldflags='-L/usr/local/lib -lMacportsLegacySupport' && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 ./all.bash ) 
+Building Go cmd/dist using /usr/local/go1.9.7.
+Building Go toolchain1 using /usr/local/go1.9.7.
+Building Go bootstrap cmd/go (go_bootstrap) using Go toolchain1.
+clang: warning: argument unused during compilation: '-nopie'
+Building Go toolchain2 using go_bootstrap and Go toolchain1.
+Building Go toolchain3 using go_bootstrap and Go toolchain2.
+Building packages and commands for darwin/amd64.
+
+##### Testing packages.
+ok  	archive/tar	0.107s
+ok  	archive/zip	2.884s
+
+<...boring...details...omitted...>
+
+##### GOMAXPROCS=2 runtime -cpu=1,2,4 -quick
+ok  	runtime	13.517s
+
+##### Testing without libgcc.
+dyld: Symbol not found: _unlinkat
+  Referenced from: /var/folders/7c/vqbsk8sn48g90kh7fnmvpd080000gn/T/go-build075507559/b001/x509.test
+  Expected in: flat namespace
+
+FAIL	crypto/x509	1.361s
+2019/05/16 15:18:35 Failed: exit status 1
+dyld: Symbol not found: _unlinkat
+  Referenced from: /var/folders/7c/vqbsk8sn48g90kh7fnmvpd080000gn/T/go-build124050274/b001/net.test
+  Expected in: flat namespace
+
+FAIL	net	5.617s
+2019/05/16 15:18:35 Failed: exit status 1
+ok  	os/user	0.012s
+
+##### sync -cpu=10
+ok  	sync	0.236s
+
+##### Testing race detector
+skipped due to earlier error
+skipped due to earlier error
+skipped due to earlier error
+skipped due to earlier error
+skipped due to earlier error
+
+##### ../misc/cgo/stdio
+skipped due to earlier error
+
+##### ../misc/cgo/life
+skipped due to earlier error
+
+##### ../misc/cgo/test
+skipped due to earlier error
+skipped due to earlier error
+skipped due to earlier error
+skipped due to earlier error
+2019/05/16 15:18:42 FAILED
+$ </pre>
+  </div>
+
+  <p>
+    Earlier tests have passed, but then more tests were run and some of them failed.
+	This turned out to be end of the line for MacPorts solution as new failing tests
+	require internal link mode.
+  </p>
+
+  <h4 id="TOC_5.">Parte 4</h4>
+
+  <p>
+    At this point, the missing part was to figure out how to include <code>libMacportsLegacySupport</code>
+	for internal link mode.  After looking under a sufficient number of stones and flipping through
+	the content of some obscure tickets, I found a reference to the strange magic that I was looking
+	for - in the final lines of
+	<a href="https://github.com/alexv-github/go/blame/release-branch.go1.12/src/runtime/sys_darwin.go#L427"
+		target="_blank"><code>runtime/sys_darwin.go</code></a>:
+  </p>
+
+  <div class=code>
+    <pre>// Magic incantation to get libSystem actually dynamically linked.
+// TODO: Why does the code require this?  See cmd/link/internal/ld/go.go
+//go:cgo_import_dynamic _ _ "/usr/lib/libSystem.B.dylib"</pre>
+  </div>
+
+  <p>
+    I added similar incantation as 
+	<a href="https://github.com/alexv-github/go/blob/go1.12.5-osx-legacy/src/runtime/sys_mpls_darwin_amd64.go"
+		target="_blank"><code>runtime/sys_mpls_darwin_amd64.go</code></a>.
+  </p>
+
+  <p>
+    The final version of patched code is on the branch
+	<a href="https://github.com/alexv-github/go/commits/go1.12.5-osx-legacy"
+		target="_blank"><code>go1.12.5-osx-legacy</code></a> of the fork. Build
+		incantation now simplifies to an original one:
+  </p>
+
+  <div class=code>
+    <pre>$ ( cd go/src/github.com/alexv-github/go/ && git checkout go1.12.5-osx-legacy ) 
+M	src/crypto/x509/root_cgo_darwin.go
+Branch go1.12.5-osx-legacy set up to track remote branch go1.12.5-osx-legacy from origin.
+Switched to a new branch 'go1.12.5-osx-legacy'
+$ ( cd go/src/github.com/alexv-github/go/ && cd src && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 ./all.bash ) 
+Building Go cmd/dist using /usr/local/go1.9.7.
+Building Go toolchain1 using /usr/local/go1.9.7.
+Building Go bootstrap cmd/go (go_bootstrap) using Go toolchain1.
+Building Go toolchain2 using go_bootstrap and Go toolchain1.
+Building Go toolchain3 using go_bootstrap and Go toolchain2.
+Building packages and commands for darwin/amd64.
+
+##### Testing packages.
+ok  	archive/tar	0.085s
+ok  	archive/zip	3.114s
+
+<...boring...details...omitted...>
+
+##### ../test
+
+##### API check
+Go version is "go1.12.5", ignoring -next /Users/ubuntu/go/src/github.com/alexv-github/go/api/next.txt
+
+ALL TESTS PASSED
+---
+Installed Go for darwin/amd64 in /Users/ubuntu/go/src/github.com/alexv-github/go
+Installed commands in /Users/ubuntu/go/src/github.com/alexv-github/go/bin
+*** You need to add /Users/ubuntu/go/src/github.com/alexv-github/go/bin to your PATH.
+$ <pre>
+  </div>
+
+  <p>
+    Now tests passed and <code>all.bash</code> completed as indicated in the
+    <a href="https://golang.org/doc/install/source#install"
+		target="_blank">original instructions</a>.
+  </p>
+
+
+  <h4 id="TOC_6.">Finale</h4>
+
+  <p>
+    The final version of patch is specialized for <code>darwin/amd64</code>.  It may work for
+	<code>darwin/386</code> as well, however I do not have access to this platform in order to
+	verify this.
+  </p>
+
+  <p>
+    You may think that with <code>libMacportsLegacySupport.a</code> size being under 20kb, it
+	would make sense to always link this library statically.  If you decide to go down this
+	route, you will hit two walls.
+  </p>
+
+  <p>
+    First, <code>libMacportsLegacySupport.a</code> is in 
+	<a href="https://www.freebsd.org/cgi/man.cgi?query=ar&sektion=5"
+		target="_blank"><code>BSD ar format</code></a>, which golang does not support.
+	This is fixable at an expense of a couple of dozen lines perhaps, and functionality
+	bloat that this will bring in.
+  </p>
+
+  <p>
+    Second and much more uglier obstacle is that all external symbols that are resolved through
+	<code>libMacportsLegacySupport</code>, are hardwired to be resolved through <code>.dylib</code>.
+	They simply do not belong to the list of external symbols which are resolved by internal
+	link.  If you add <code>libMacportsLegacySupport.a</code> to the list of built-in packages,
+	its entry symbols will never actually be used.
+  </p>
+
+  <p>
+    In order to change this, a bunch of declarations for external functions has to unwired from
+	being resolved strictly through <code>.dylib</code>.  Such change would be really intrusive
+	and likely real pain to rebase for future releases of golang. I did not bother myself with even
+	evaluating it.
+  </p>
+
+  <p>
+    If you have read this far, you probably have now a  nicely working installation of go1.12 for your
+	legacy OS X.  Perhaps it was not a totally worthless reading, after all?
+  </p>
+
+  <p>
+    Disclaimer: No pigs were f... er-r, hm-m, harmed in the course of this undertaking.
+  </p>
+
+
+	</div>
+
+<!--
+	<p>See the <a href="/index">index</a> for more articles.
+  -->
+
+
+</div>
+
+<div id="footer">
+	<p>
+	Copyright &#169; 2009, 2019 The rightful owners
+	</p>
+</div>
+
+</div>
+</div>
+
+</body>
+<script src="/lib/godoc/jquery.js"></script>
+<script src="/lib/godoc/godocs.js"></script>
+<style>
+span.gc1 { color: #f00 }
+span.gc2 { color: #fa0 }
+span.gc3 { color: #ee0 }
+span.gc4 { color: #0c0 }
+span.gc5 { color: #00f }
+span.gc6 { color: #f0f }
+</style>
+</html>
