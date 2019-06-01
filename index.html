@@ -542,7 +542,7 @@ $ </pre>
 	<code>libMacportsLegacySupport</code>, are hardwired to be resolved through <code>.dylib</code>.
 	They simply do not belong to the list of external symbols which are resolved by internal
 	link.  If you add <code>libMacportsLegacySupport.a</code> to the list of built-in packages,
-	its entry symbols will never actually be used.
+	its entry symbols will never actually be looked at.
   </p>
 
   <p>
