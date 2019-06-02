@@ -169,30 +169,30 @@ $ ls -la /usr/local/lib/*cySu*</pre>
 	<a href="https://github.com/macports/macports-ports/commit/abe46d0764f08fdec9a4923880ce03edbc768a0d"
 		target="_blank"><i>patch</i></a> from MacPorts to get working version of <code>go1.12</code>
 	for a starter. I created and downloaded a 
-	<a href="https://github.com/alexv-github/go"
+	<a href="https://github.com/av86743/go"
 		target="_blank"><i>fork of golang/go</i></a>:
   </p>
 
   <div class=code>
-    <pre>$ /usr/local/go1.9.7/bin/go get github.com/alexv-github/go 
-package github.com/alexv-github/go: no Go files in /Users/ubuntu/go/src/github.com/alexv-github/go
+    <pre>$ /usr/local/go1.9.7/bin/go get github.com/av86743/go 
+package github.com/av86743/go: no Go files in /Users/ubuntu/go/src/github.com/av86743/go
 $ </pre>
   </div>
 
   <p>
     The patched code is now on the branch 
-	<a href="https://github.com/alexv-github/go/commits/go1.12.5-osx-legacy-take1"
+	<a href="https://github.com/av86743/go/commits/go1.12.5-osx-legacy-take1"
 		target="_blank"><code>go1.12.5-osx-legacy-take1</code></a> of this fork. After certain
 	tweaking of environment variables, suitable build incantation turned out to be this:
   </p>
 
   <div class=code>
-    <pre>$ ( cd go/src/github.com/alexv-github/go/ && git checkout go1.12.5-osx-legacy-take1 ) 
+    <pre>$ ( cd go/src/github.com/av86743/go/ && git checkout go1.12.5-osx-legacy-take1 ) 
 Checking out files: 100% (10463/10463), done.
 Previous HEAD position was 6174b5e... go1
 Branch go1.12.5-osx-legacy-take1 set up to track remote branch go1.12.5-osx-legacy-take1 from origin.
 Switched to a new branch 'go1.12.5-osx-legacy-take1'
-$ ( cd go/src/github.com/alexv-github/go/ && cd src && configure_ldflags='-L/usr/local/lib -lMacportsLegacySupport' && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 GO_EXTLINK_ENABLED=1 GO_LDFLAGS='"-extldflags='"${configure_ldflags}"'"' BOOT_GO_LDFLAGS='-extldflags='"${configure_ldflags}"'' ./make.bash ) 
+$ ( cd go/src/github.com/av86743/go/ && cd src && configure_ldflags='-L/usr/local/lib -lMacportsLegacySupport' && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 GO_EXTLINK_ENABLED=1 GO_LDFLAGS='"-extldflags='"${configure_ldflags}"'"' BOOT_GO_LDFLAGS='-extldflags='"${configure_ldflags}"'' ./make.bash ) 
 Building Go cmd/dist using /usr/local/go1.9.7.
 Building Go toolchain1 using /usr/local/go1.9.7.
 Building Go bootstrap cmd/go (go_bootstrap) using Go toolchain1.
@@ -201,8 +201,8 @@ Building Go toolchain2 using go_bootstrap and Go toolchain1.
 Building Go toolchain3 using go_bootstrap and Go toolchain2.
 Building packages and commands for darwin/amd64.
 ---
-Installed Go for darwin/amd64 in /Users/ubuntu/go/src/github.com/alexv-github/go
-Installed commands in /Users/ubuntu/go/src/github.com/alexv-github/go/bin
+Installed Go for darwin/amd64 in /Users/ubuntu/go/src/github.com/av86743/go
+Installed commands in /Users/ubuntu/go/src/github.com/av86743/go/bin
 $ </pre>
   </div>
 
@@ -223,7 +223,7 @@ $ </pre>
     <a href="https://golang.org/doc/install/source#install"
 		target="_blank">Original instructions</a> to install golang from sources actually invoke
 	<code>all.bash</code>. <code>all.bash</code>
-	<a href="https://github.com/alexv-github/go/blob/release-branch.go1.12/src/all.bash#L12"
+	<a href="https://github.com/av86743/go/blob/release-branch.go1.12/src/all.bash#L12"
 		target="_blank">invokes</a> <code>make.bash</code> and after that <code>run.bash</code>.
 	It is the latter that runs golang tests.  I replaced <code>make.bash</code> with
 	<code>all.bash</code>, but this failed even before the tests started, because environment
@@ -241,16 +241,16 @@ $ </pre>
 
   <p>
     The patched code is now on the branch 
-	<a href="https://github.com/alexv-github/go/commits/go1.12.5-osx-legacy-take2"
+	<a href="https://github.com/av86743/go/commits/go1.12.5-osx-legacy-take2"
 		target="_blank"><code>go1.12.5-osx-legacy-take2</code></a> of the fork. Build
 		incantation became simpler:
   </p>
 
   <div class=code>
-    <pre>$ ( cd go/src/github.com/alexv-github/go/ && git checkout go1.12.5-osx-legacy-take2 ) 
+    <pre>$ ( cd go/src/github.com/av86743/go/ && git checkout go1.12.5-osx-legacy-take2 ) 
 Branch go1.12.5-osx-legacy-take2 set up to track remote branch go1.12.5-osx-legacy-take2 from origin.
 Switched to a new branch 'go1.12.5-osx-legacy-take2'
-$ ( cd go/src/github.com/alexv-github/go/ && cd src && configure_mplsldflags='-L/usr/local/lib -lMacportsLegacySupport' && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 ./all.bash ) 
+$ ( cd go/src/github.com/av86743/go/ && cd src && configure_mplsldflags='-L/usr/local/lib -lMacportsLegacySupport' && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 ./all.bash ) 
 Building Go cmd/dist using /usr/local/go1.9.7.
 Building Go toolchain1 using /usr/local/go1.9.7.
 Building Go bootstrap cmd/go (go_bootstrap) using Go toolchain1.
@@ -290,7 +290,7 @@ $ </pre>
 	it instantly hits one of tripwires which I have naturally placed around.  As luck had it this time,
 	"my problem" stemmed from user certificate present on my account.  After a bit of boring bisecting,
 	I narrowed down segfault to this fragment of
-	<a href="https://github.com/alexv-github/go/blob/release-branch.go1.12/src/crypto/x509/root_cgo_darwin.go#L30"
+	<a href="https://github.com/av86743/go/blob/release-branch.go1.12/src/crypto/x509/root_cgo_darwin.go#L30"
 		target="_blank"><code>isSSLPolicy()</code></a>:
   </p>
 
@@ -304,13 +304,13 @@ $ </pre>
 
   <p>
     which obviously works much better when changed like
-	<a href="https://github.com/alexv-github/go/commit/2ce3919cbfd526f4c427e52b99726e1d55925995"
+	<a href="https://github.com/av86743/go/commit/2ce3919cbfd526f4c427e52b99726e1d55925995"
 		target="_blank"><i>this</i></a>.
   </p>
 
   <p>
     Here is a shapshot of the corresponding
-	<a href="https://github.com/alexv-github/go/blame/release-branch.go1.12/src/crypto/x509/root_cgo_darwin.go#L18"
+	<a href="https://github.com/av86743/go/blame/release-branch.go1.12/src/crypto/x509/root_cgo_darwin.go#L18"
 		target="_blank"><i>blame</i></a>:
   </p>
 
@@ -334,7 +334,7 @@ $ </pre>
 
   <p>
     In any case, if you are getting segfaults in <code>FetchPEMRoots</code>, apply patch from
-	<a href="https://github.com/alexv-github/go/commits/go1.12-fkup-0001"
+	<a href="https://github.com/av86743/go/commits/go1.12-fkup-0001"
 		target="_blank"><i>this</i></a> branch of the fork and see if this does the trick.
   </p>
 
@@ -361,7 +361,7 @@ $ </pre>
 
   <p>
     In order to verify that my understanding is correct, I additionally changed selection of link mode in
-	<a href="https://github.com/alexv-github/go/commit/6ed1d853abe203c9c3b73fbe26a0cdacf114397f"
+	<a href="https://github.com/av86743/go/commit/6ed1d853abe203c9c3b73fbe26a0cdacf114397f"
 		target="_blank"><code>determineLinkMode()</code></a> to be always internal for cross-compiles,
 	even when link mode is forced to be external by setting variable <code>GO_EXTLINK_ENABLED=1</code>
 	(explicitly or by default). This is not acceptable as a permanent solution as it changes the default
@@ -371,18 +371,18 @@ $ </pre>
 
   <p>
     The patched code is on the branch 
-	<a href="https://github.com/alexv-github/go/commits/go1.12.5-osx-legacy-take3"
+	<a href="https://github.com/av86743/go/commits/go1.12.5-osx-legacy-take3"
 		target="_blank"><code>go1.12.5-osx-legacy-take3</code></a> of the fork. Build
 		incantation remains the same:
   </p>
 
   <div class=code>
-    <pre>$ ( cd go/src/github.com/alexv-github/go/ && git checkout go1.12.5-osx-legacy-take3 ) 
+    <pre>$ ( cd go/src/github.com/av86743/go/ && git checkout go1.12.5-osx-legacy-take3 ) 
 Branch go1.12.5-osx-legacy-take3 set up to track remote branch go1.12.5-osx-legacy-take3 from origin.
 Switched to a new branch 'go1.12.5-osx-legacy-take3'
-$ ( cd go/src/github.com/alexv-github/go/ && git show 2ce3919 | patch -p1 ) 
+$ ( cd go/src/github.com/av86743/go/ && git show 2ce3919 | patch -p1 ) 
 patching file src/crypto/x509/root_cgo_darwin.go
-$ ( cd go/src/github.com/alexv-github/go/ && cd src && configure_mplsldflags='-L/usr/local/lib -lMacportsLegacySupport' && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 ./all.bash ) 
+$ ( cd go/src/github.com/av86743/go/ && cd src && configure_mplsldflags='-L/usr/local/lib -lMacportsLegacySupport' && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 ./all.bash ) 
 Building Go cmd/dist using /usr/local/go1.9.7.
 Building Go toolchain1 using /usr/local/go1.9.7.
 Building Go bootstrap cmd/go (go_bootstrap) using Go toolchain1.
@@ -453,7 +453,7 @@ $ </pre>
 	for internal link mode.  After looking under sufficient number of stones and flipping through
 	the content of some obscure tickets, I found a reference to the strange magic that I was looking
 	for - in the final lines of
-	<a href="https://github.com/alexv-github/go/blame/release-branch.go1.12/src/runtime/sys_darwin.go#L427"
+	<a href="https://github.com/av86743/go/blame/release-branch.go1.12/src/runtime/sys_darwin.go#L427"
 		target="_blank"><code>runtime/sys_darwin.go</code></a>:
   </p>
 
@@ -465,23 +465,23 @@ $ </pre>
 
   <p>
     I added similar incantation as 
-	<a href="https://github.com/alexv-github/go/blob/go1.12.5-osx-legacy/src/runtime/sys_mpls_darwin_amd64.go"
+	<a href="https://github.com/av86743/go/blob/go1.12.5-osx-legacy/src/runtime/sys_mpls_darwin_amd64.go"
 		target="_blank"><code>runtime/sys_mpls_darwin_amd64.go</code></a>.
   </p>
 
   <p>
     The final version of patched code is on the branch
-	<a href="https://github.com/alexv-github/go/commits/go1.12.5-osx-legacy"
+	<a href="https://github.com/av86743/go/commits/go1.12.5-osx-legacy"
 		target="_blank"><code>go1.12.5-osx-legacy</code></a> of the fork. Build
 		incantation now simplifies to an original one:
   </p>
 
   <div class=code>
-    <pre>$ ( cd go/src/github.com/alexv-github/go/ && git checkout go1.12.5-osx-legacy ) 
+    <pre>$ ( cd go/src/github.com/av86743/go/ && git checkout go1.12.5-osx-legacy ) 
 M	src/crypto/x509/root_cgo_darwin.go
 Branch go1.12.5-osx-legacy set up to track remote branch go1.12.5-osx-legacy from origin.
 Switched to a new branch 'go1.12.5-osx-legacy'
-$ ( cd go/src/github.com/alexv-github/go/ && cd src && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 ./all.bash ) 
+$ ( cd go/src/github.com/av86743/go/ && cd src && env GOROOT_BOOTSTRAP=/usr/local/go1.9.7 ./all.bash ) 
 Building Go cmd/dist using /usr/local/go1.9.7.
 Building Go toolchain1 using /usr/local/go1.9.7.
 Building Go bootstrap cmd/go (go_bootstrap) using Go toolchain1.
@@ -498,13 +498,13 @@ ok  	archive/zip	3.114s
 ##### ../test
 
 ##### API check
-Go version is "go1.12.5", ignoring -next /Users/ubuntu/go/src/github.com/alexv-github/go/api/next.txt
+Go version is "go1.12.5", ignoring -next /Users/ubuntu/go/src/github.com/av86743/go/api/next.txt
 
 ALL TESTS PASSED
 ---
-Installed Go for darwin/amd64 in /Users/ubuntu/go/src/github.com/alexv-github/go
-Installed commands in /Users/ubuntu/go/src/github.com/alexv-github/go/bin
-*** You need to add /Users/ubuntu/go/src/github.com/alexv-github/go/bin to your PATH.
+Installed Go for darwin/amd64 in /Users/ubuntu/go/src/github.com/av86743/go
+Installed commands in /Users/ubuntu/go/src/github.com/av86743/go/bin
+*** You need to add /Users/ubuntu/go/src/github.com/av86743/go/bin to your PATH.
 $ </pre>
   </div>
 
